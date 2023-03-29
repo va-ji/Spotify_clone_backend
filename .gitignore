@@ -1,2 +1,5 @@
 #virtual env modules
 venv/
+
+#pycache files
+__pycache__/
