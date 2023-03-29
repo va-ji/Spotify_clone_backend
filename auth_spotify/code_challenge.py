@@ -4,7 +4,8 @@ import hashlib
 import base64
 
 class CodeChallenge:
-    def generate_code_verifier(self,length):
+    @staticmethod
+    def _generate_code_verifier(self,length):
         text = ''
         possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
 
@@ -13,6 +14,7 @@ class CodeChallenge:
 
         return text
 
+    @staticmethod
     def generate_code_challenge(self):
         
         code_verifier = self.generate_code_verifier(60)
