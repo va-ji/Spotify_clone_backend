@@ -14,7 +14,7 @@ class AuthenticateSpotify:
 
         redirect_uri = os.getenv("REDIRECT_URI")
         base_url = 'https://accounts.spotify.com/authorize'
-        scope = 'user-read-private user-read-email streaming user-read-playback-state user-modify-playback-state user-read-current-playing playlist-modify-private playlist-modify-public'
+        scope = 'user-read-private streaming user-read-playback-state user-modify-playback-state user-read-currently-playing playlist-modify-private playlist-modify-public'
         params = {
             "response_type": 'code',
             "client_id": client_id,
@@ -24,7 +24,8 @@ class AuthenticateSpotify:
             "code_challenge": code_challenge
         }
 
-        url = base_url + '?' + urlencode(params)
+        query_string = urlencode(params)
+        url = f'{base_url}?{str(query_string)}'
 
         print('url: ' + url)
 
