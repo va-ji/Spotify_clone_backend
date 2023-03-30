@@ -5,19 +5,19 @@ import base64
 
 class CodeChallenge:
     @staticmethod
-    def _generate_code_verifier(self,length):
+    def _generate_code_verifier(length):
         text = ''
         possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
 
         for  i in range(length) :
-          text += possible.charAt(math.floor(random.random() * possible.length))
+          text += possible[math.floor(random.random() * len(possible))]
 
         return text
 
     @staticmethod
-    def generate_code_challenge(self):
+    def generate_code_challenge():
         
-        code_verifier = self.generate_code_verifier(60)
+        code_verifier = CodeChallenge._generate_code_verifier(length=60)
 
        # Encode the code verifier as bytes using UTF-8
         code_verifier_bytes = code_verifier.encode('utf-8')
