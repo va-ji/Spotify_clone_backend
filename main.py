@@ -5,13 +5,20 @@ from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
 
+origins = [
+    "http://localhost",
+    "http://localhost:3000",
+]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+auth_spotify = AuthenticateSpotify()
 
 @app.get("/")
 def read_root():
@@ -19,6 +26,12 @@ def read_root():
 
 @app.get("/authorise")
 def get_spotify_url():
-    auth_spotify = AuthenticateSpotify()
     url = auth_spotify.get_authenticate_url()
     return {"status_code":200,"result":url}
+
+@app.get("/authorise/token/{code}")
+def get_access_token(code):
+    auth_code = code
+    response = auth_spotify.get_spotify_access_token(code=auth_code)
+    print(response)
+    return {"status_code":200,"result":response}
