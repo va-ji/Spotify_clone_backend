@@ -4,6 +4,9 @@ import hashlib
 import base64
 
 class CodeChallenge:
+    
+    code_verifier = None
+
     @staticmethod
     def _generate_code_verifier(length):
         text = ''
@@ -11,6 +14,9 @@ class CodeChallenge:
 
         for  i in range(length) :
           text += possible[math.floor(random.random() * len(possible))]
+
+        CodeChallenge.code_verifier = text
+        print(f'code verifier: {CodeChallenge.code_verifier}')
 
         return text
 
