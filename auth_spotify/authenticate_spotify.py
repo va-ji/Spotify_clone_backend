@@ -1,3 +1,4 @@
+import json
 from dotenv import load_dotenv
 import os
 from auth_spotify.code_challenge import CodeChallenge
@@ -48,7 +49,13 @@ class AuthenticateSpotify:
         url = self.base_url + '/api/token'
         try:
             response = requests.post(url=url,headers=headers,data=body)
-            return response.content.decode('utf-8')
+            response = json.loads(response.content.decode('utf-8'))
+            print(response)
+            data = {
+                "access_token" : response.get('access_token'),
+                "refresh_token": response.get('refresh_token'),
+            }
+            return data
         except Exception as e:
             raise Exception(str(e))
         

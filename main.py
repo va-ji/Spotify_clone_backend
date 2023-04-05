@@ -1,4 +1,3 @@
-import json
 from fastapi import FastAPI
 from auth_spotify.authenticate_spotify import AuthenticateSpotify
 from fastapi.middleware.cors import CORSMiddleware
@@ -33,5 +32,5 @@ def get_spotify_url():
 def get_access_token(code):
     auth_code = code
     response = auth_spotify.get_spotify_access_token(code=auth_code)
-    print(response)
+   
     return {"status_code":200,"result":response}
